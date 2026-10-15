@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.procampo.controller.ItemFormController"
+      spacing="20" styleClass="card" stylesheets="@../css/style.css">
+
+    <!-- LEFT AREA: TABLE AND SEARCH -->
+    <VBox spacing="14" HBox.hgrow="ALWAYS">
+        <HBox alignment="CENTER_LEFT" spacing="12">
+            <VBox>
+                <Label text="Catálogo Global de Preços" styleClass="card-title"/>
+                <Label text="Fonte única de valores. Mudanças atualizam todos os orçamentos em cascata" styleClass="card-subtitle"/>
+            </VBox>
+        </HBox>
+
+        <HBox spacing="10">
+            <TextField fx:id="txtBuscaItem" promptText="Consultar item por nome ou unidade..." HBox.hgrow="ALWAYS" styleClass="text-field"/>
+            <Button text="Buscar" styleClass="btn-secondary" onAction="#handleBuscarItens"/>
+            <Button text="Todos" styleClass="btn-secondary" onAction="#handleListarTodos"/>
+        </HBox>
+
+        <TableView fx:id="tblItens" VBox.vgrow="ALWAYS" styleClass="table-view">
+            <columns>
+                <TableColumn fx:id="colItemDesc" text="Descrição do Item / Insumo / Mão de Obra" prefWidth="250"/>
+                <TableColumn fx:id="colItemCategoria" text="Categoria" prefWidth="120"/>
+                <TableColumn fx:id="colItemUnit" text="Unidade" prefWidth="80"/>
+                <TableColumn fx:id="colItemValor" text="Valor Unit. (R$)" prefWidth="120" style="-fx-alignment: CENTER-RIGHT; -fx-font-weight: bold;"/>
+            </columns>
+        </TableView>
+
+        <HBox spacing="12" alignment="CENTER_RIGHT">
+            <Button text="Excluir Item Selecionado" styleClass="btn-danger" onAction="#handleExcluirItem"/>
+        </HBox>
+    </VBox>
+
+    <!-- RIGHT AREA: FORM ADICIONAR / EDITAR -->
+    <VBox spacing="14" style="-fx-background-color: #f8fafc; -fx-padding: 20px; -fx-background-radius: 10px; -fx-border-color: #e2e8f0; -fx-border-radius: 10px; -fx-pref-width: 320px;">
+        <Label fx:id="lblFormTitle" text="➕ Novo Item de Preço" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2d3748;"/>
+        <Label text="Preencha ou edite os dados da fonte de preço:" style="-fx-font-size: 12px; -fx-text-fill: #718096;"/>
+
+        <VBox spacing="6">
+            <Label text="Descrição / Especificação do Item *" style="-fx-font-weight: bold; -fx-font-size: 12px;"/>
+            <TextField fx:id="txtDescricao" promptText="Ex: PEDREIRO, CIMENTO, ADUBO..." styleClass="text-field"/>
+        </VBox>
+
+        <VBox spacing="6">
+            <Label text="Unidade de Medida *" style="-fx-font-weight: bold; -fx-font-size: 12px;"/>
+            <TextField fx:id="txtUnidade" promptText="Ex: HD, KG, SC, M, UNID..." styleClass="text-field"/>
+        </VBox>
+
+        <VBox spacing="6">
+            <Label text="Categoria" style="-fx-font-weight: bold; -fx-font-size: 12px;"/>
+            <TextField fx:id="txtCategoria" promptText="Ex: Adubo, Mão de Obra..." styleClass="text-field"/>
+        </VBox>
+
+        <VBox spacing="6">
+            <Label text="Valor Unitário (R$ 1,00) *" style="-fx-font-weight: bold; -fx-font-size: 12px;"/>
+            <TextField fx:id="txtValor" promptText="Ex: 120.00" styleClass="text-field"/>
+        </VBox>
+
+        <Region VBox.vgrow="ALWAYS"/>
+
+        <VBox spacing="10">
+            <Button text="💾 Salvar no Catálogo" styleClass="btn-primary" maxWidth="Infinity" onAction="#handleSalvarItem"/>
+            <Button text="❌ Cancelar / Limpar" styleClass="btn-secondary" maxWidth="Infinity" onAction="#handleLimparFormulario"/>
+        </VBox>
+    </VBox>
+</HBox>

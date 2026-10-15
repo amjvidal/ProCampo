@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.procampo.controller.ModeloDetailController"
+      spacing="16" styleClass="card" stylesheets="@../css/style.css">
+
+    <!-- TOP HEADER -->
+    <HBox alignment="CENTER_LEFT" spacing="14">
+        <Button text="⬅ Voltar ao Catálogo" styleClass="btn-secondary" onAction="#handleVoltar"/>
+        <VBox>
+            <Label fx:id="lblNomeModelo" text="Modelo de Orçamento" styleClass="card-title"/>
+            <Label fx:id="lblMetaResumo" text="Ciclo: - | Espaçamento: - | Produtividade: -" styleClass="card-subtitle"/>
+        </VBox>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="📄 Exportar PDF" styleClass="btn-secondary" onAction="#handleExportarPDF"/>
+        <Button text="⚙️ Editar Dados / Metadados" styleClass="btn-secondary" onAction="#toggleMetadadosBox"/>
+    </HBox>
+
+    <!-- METADATAS EDIT PANEL (COLLAPSIBLE) -->
+    <VBox fx:id="boxMetadados" spacing="12" managed="false" visible="false"
+          style="-fx-background-color: #f8fafc; -fx-padding: 16px; -fx-background-radius: 8px; -fx-border-color: #edf2f7; -fx-border-radius: 8px;">
+        <Label text="Metadados do Orçamento Agropecuário" style="-fx-font-weight: bold; -fx-text-fill: #2b6cb0;"/>
+        <HBox spacing="12">
+            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                <Label text="Nome do Projeto *" style="-fx-font-size: 11px; -fx-font-weight: bold;"/>
+                <TextField fx:id="txtEditNome" styleClass="text-field"/>
+            </VBox>
+            <VBox spacing="4" prefWidth="180">
+                <Label text="Categoria *" style="-fx-font-size: 11px; -fx-font-weight: bold;"/>
+                <TextField fx:id="txtEditCategoria" styleClass="text-field"/>
+            </VBox>
+            <VBox spacing="4" prefWidth="150">
+                <Label text="Ciclo Produtivo" style="-fx-font-size: 11px; -fx-font-weight: bold;"/>
+                <TextField fx:id="txtEditCiclo" promptText="Ex: Perene, Anual" styleClass="text-field"/>
+            </VBox>
+        </HBox>
+        <HBox spacing="12">
+            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                <Label text="Espaçamento / Sistema" style="-fx-font-size: 11px; -fx-font-weight: bold;"/>
+                <TextField fx:id="txtEditEspacamento" promptText="Ex: 3,50 x 3,00 m" styleClass="text-field"/>
+            </VBox>
+            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                <Label text="Produtividade / Capacidade" style="-fx-font-size: 11px; -fx-font-weight: bold;"/>
+                <TextField fx:id="txtEditProdutividade" promptText="Ex: 20.000 kg ou 120m²" styleClass="text-field"/>
+            </VBox>
+            <VBox spacing="4" alignment="BOTTOM_RIGHT">
+                <Button text="💾 Salvar Alterações" styleClass="btn-primary" onAction="#handleSalvarMetadados"/>
+            </VBox>
+        </HBox>
+    </VBox>
+
+    <!-- ETAPAS AND COMPOSICOES CONTAINER (SCROLLABLE) -->
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent;">
+        <VBox fx:id="boxEtapasContainer" spacing="20" style="-fx-padding: 4px;">
+            <!-- Dynamic stages injected here by controller -->
+        </VBox>
+    </ScrollPane>
+
+    <!-- BOTTOM TOTALIZER & STAGE ACTIONS -->
+    <HBox alignment="CENTER_LEFT" spacing="16" style="-fx-padding: 12px 0 0 0; -fx-border-color: #edf2f7 transparent transparent transparent;">
+        <Button text="+ Nova Etapa de Produção" styleClass="btn-primary" onAction="#handleNovaEtapa"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        
+        <HBox styleClass="badge-total" alignment="CENTER_RIGHT" spacing="12">
+            <Label text="TOTAL GERAL DO PROJETO:" styleClass="badge-total-label"/>
+            <Label fx:id="lblTotalGeral" text="R$ 0,00" styleClass="badge-total-value"/>
+        </HBox>
+    </HBox>
+</VBox>
